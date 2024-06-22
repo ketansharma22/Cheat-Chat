@@ -1,0 +1,9 @@
+
+html,
+body{
+  margin: 0;
+  padding: 0;
+  background:rgb(35, 35, 35);
+  color: white;
+  font-family:'Courier New', Courier, monospace,serif;
+}
