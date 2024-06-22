@@ -1,6 +1,6 @@
 import React from 'react'
 import { userLogin, userSignUp } from '../helpers/api_communicators'
-import React, { useContext,useState } from 'react'
+import  { useContext,useState } from 'react'
 const AuthContext=React.createContext()
 export function useAuth() {
   return useContext(AuthContext)
@@ -26,8 +26,15 @@ export function useAuth() {
           }
         }
 
-        const logout=async()=>{
+        const value={
+        user,
+        isLoggedIn,
+        login,
+        signup
+      }
+return <AuthContext.Provider value={value} >{children}</AuthContext.Provider>
 
-        }
 
-}
+
+      }
+      

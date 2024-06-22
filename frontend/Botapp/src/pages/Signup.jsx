@@ -10,16 +10,17 @@ function Signup() {
   const[name,setName]=useState("")
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
-
-  async function handlesubmit(e){
+  const [formData,setFormData]=useState({})
+   async function handlesubmit(e){
     e.preventDefault()
-
+    setFormData({email,password,name})
+    console.log(formData);
   }
 
 
   return (
     <div id="signuppage">
-      <form id="boxsignup" onSubmit={(e)=>{handlesubmit}}>
+      <form id="boxsignup" onSubmit={handlesubmit}>
         <img id="logoimage" src={logo} />
         <h1>Create an Account</h1>
 
@@ -44,7 +45,7 @@ function Signup() {
           >
             Email-Address
           </label>
-          <input required type="email" placeholder="Email-Address*" onChange={(e)=> setEmail(e.target.value)}/>
+          <input required type="email" placeholder="Email-Address*" value={email} onChange={(e)=> setEmail(e.target.value)}/>
           <br />
           <label
             style={{
@@ -55,7 +56,7 @@ function Signup() {
           >
             Password
           </label>
-          <input required type="password" placeholder="Password*" onChange={(e)=>setPassword(e.target.value)} />
+          <input required type="password" value={password} placeholder="Password*" onChange={(e)=>setPassword(e.target.value)} />
         </div>
 
         <button id="continue" type="submit" >Continue</button>
