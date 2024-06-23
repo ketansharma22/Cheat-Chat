@@ -59,18 +59,18 @@ export const userLogin=async(req,res,next)=>{
         }
         const isPassCorrect=await compare(password,user.password)
             
-        if(!isPassCorrect){x`   `
-            res.status(403).send("incorrect password")
+        if(!isPassCorrect){
+            return res.status(403).json("incorrect password")
         }
         console.log("login");
         
 
-        // res.clearCookie(COOKIE_NAME,{
-        //     domain:"localhost",
-        //     httpOnly:true,
-        //     signed:true,
-        //     path:'/',
-        // })  
+        res.clearCookie(COOKIE_NAME,{
+            domain:"localhost",
+            httpOnly:true,
+            signed:true,
+            path:'/',
+        })  
 
         const token=createToken(user._id.toString(),user.email,"7d")
         console.log(token);
@@ -78,15 +78,16 @@ export const userLogin=async(req,res,next)=>{
         const expires=new Date()
         expires.setDate(expires.getDate()+7)
 
-        res.cookie(COOKIE_NAME,token,
+        res.status(200).cookie(COOKIE_NAME,token,
         {
             path:'/',
             domain:"localhost",
-            expires,
+            expires:expires,
             httpOnly:true,
             signed:true,
             secure:false,
         })
+        res.send({message:"loginsuccess"})
 
     }   
     
