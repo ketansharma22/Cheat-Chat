@@ -5,10 +5,11 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import { useAuth } from './Context/AuthContext'
 function App() {
-console.log(useAuth().user);
+const auth=useAuth()
   return(
     <div>
       <Routes>
+        
         <Route path='/' element={<Home/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>} />

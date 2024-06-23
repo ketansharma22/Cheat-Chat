@@ -14,3 +14,12 @@ export const userSignUp=async(name,email,password)=>{
     return data
     
 }
+export const checkAuthStatus=async()=>{
+    const res=axios.get('/users/auth-status')
+    if(res.status!==200){
+        throw new Error("Unable to Authenticate")
+    }
+    const data=res.data
+    return data
+}
+

@@ -10,12 +10,20 @@ function Signup() {
   const[name,setName]=useState("")
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
-  const [formData,setFormData]=useState({})
+  const [formData,setFormData]=useState({
+    Name:"",
+    Email:"",
+    Password:"",
+  })
    async function handlesubmit(e){
     e.preventDefault()
     setFormData({email,password,name})
     console.log(formData);
   }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevUser) => ({ ...prevUser, [name]: value }));
+  };
 
 
   return (
@@ -34,7 +42,7 @@ function Signup() {
           >
             Name
           </label>
-          <input type="name" required placeholder="Name*" value={name} onChange={(e)=> setName(e.target.value)}  />
+          <input type="name" required placeholder="Name*" value={formData.Name} name="Name" onChange={handleChange}  />
           <br />
           <label
             style={{
@@ -45,7 +53,7 @@ function Signup() {
           >
             Email-Address
           </label>
-          <input required type="email" placeholder="Email-Address*" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+          <input required type="email" placeholder="Email-Address*" name="Email" value={formData.Email} onChange={handleChange}/>
           <br />
           <label
             style={{
@@ -56,7 +64,7 @@ function Signup() {
           >
             Password
           </label>
-          <input required type="password" value={password} placeholder="Password*" onChange={(e)=>setPassword(e.target.value)} />
+          <input required type="password" value={formData.Password} name="Password" placeholder="Password*" onChange={handleChange}/>
         </div>
 
         <button id="continue" type="submit" >Continue</button>
