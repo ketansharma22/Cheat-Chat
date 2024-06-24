@@ -2,6 +2,7 @@ import usersModel from "../models/usersModel.js"
 import {hash,compare} from 'bcrypt'
 import { createToken } from "../utils/token-manager.js"
 import { COOKIE_NAME } from "../utils/constants.js"
+
 export const getAllUsers=async(req,res,next)=>{
     try{    
         const users = await usersModel.find()
@@ -82,12 +83,12 @@ export const userLogin=async(req,res,next)=>{
         {
             path:'/',
             domain:"localhost",
-            expires:expires,
+            expires,
             httpOnly:true,
             signed:true,
             secure:false,
         })
-        res.send({message:"loginsuccess"})
+        res.send({message:"loginsuccess" ,name:user.name ,email:user.email })
 
     }   
     
@@ -118,4 +119,29 @@ export const verifyUser=async(req,res,next)=>{
     
 
     
+}
+
+export const userLogout=async(req,res,next)=>{
+    try{
+            //user token checking
+        const user=await usersModel.findById(res.locals.jwtData.id)
+        if(!user){
+            return res.status(401).send("User not registered OR Token malfunctioned");
+        }
+        if (user._id.toString() !== res.locals.jwtData.id) {
+            return res.status(401).send("Permissions didn't match");
+          }
+          res.clearCookie(COOKIE_NAME, {
+            httpOnly: true,
+            domain: "localhost",
+            signed: true,
+            path: "/",
+          })
+
+          return res.status(200).json({message:"ok",name:user.name,email:user.email})
+    }
+    catch{
+        console.log(error);
+        return res.status(200).json({ message: "ERROR", cause: error.message });
+    }
 }

@@ -28,6 +28,7 @@ function Login() {
       toast.loading("Logging In",{id:"Login"})
       await auth.login(em,pass)
       toast.success("Logged In",{id:"Login"})
+      
     }
     catch(error){
       toast.error("Login Failed",{id:"Login"})
