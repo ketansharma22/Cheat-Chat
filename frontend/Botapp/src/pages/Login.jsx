@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styling/Login.css'
 import logo from '../images/logocircle.png';
 import {Link} from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '../Context/AuthContext';
-
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate=useNavigate()
   const auth=useAuth()
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
@@ -39,6 +40,11 @@ function Login() {
     
 
   };
+  useEffect(()=>{
+    if(auth.user){
+      return navigate("/chat")
+    }
+  },[auth])
 
   return (
     <div id="loginpage">

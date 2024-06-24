@@ -95,3 +95,27 @@ export const userLogin=async(req,res,next)=>{
         console.log(error);
     } 
 }
+export const verifyUser=async(req,res,next)=>{
+    try{
+        console.log("controller");
+        const user=await usersModel.findById(res.locals.jwtData.id)
+        if(!user){
+            console.log("err in controller");
+            return res.status(401).send("User not registered OR Token malfunctioned");
+        }
+        console.log(user._id.toString(), res.locals.jwtData.id);
+        if (user._id.toString() !== res.locals.jwtData.id) {
+            console.log("not matched");
+            return res.status(401).send("Permissions didn't match");
+          }
+          console.log("success in controller");
+        return res.status(200).json({ message: "OK", name: user.name, email: user.email });
+        }
+       catch(error){
+        console.log(error);
+        return res.status(200).json({ message: "ERROR", cause: error.message });
+        } 
+    
+
+    
+}

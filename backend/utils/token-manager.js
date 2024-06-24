@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import { COOKIE_NAME } from './constants'
+
 import { config } from 'dotenv'
 config()
-
+const Cokiename="authtoken"  
 export const createToken= (id,email,expiresIn)=>{
     const token=jwt.sign({id:id,email:email},process.env.JWT_SECRET ,{
         expiresIn:expiresIn,
@@ -10,10 +10,27 @@ export const createToken= (id,email,expiresIn)=>{
     return token;
 }
 export const verifyToken=async(req,res,next)=>{
-    const token=req.signedCookies[`${COOKIE_NAME}`]
+    const token=req.signedCookies[`${Cokiename}`]
+    console.log("tokenmanager");
     if (!token || token.trim() === "") {
         return res.status(401).json({ message: "Token Not Received" });
       }
       console.log(token);
+      return new Promise((resolve, reject) => {
+        return jwt.verify(token,process.env.JWT_SECRET,(err,success)=>{
+            if(err){
+                console.log("error in tm");
+                reject(err.message);
+                return res.status(401).json({ message: "Token Expired" });
+            }
+            else{
+                console.log("success in tm");
+                resolve()
+                res.locals.jwtData=success;
+                return next()
+            }
+        })
+      })
+
 }
 
