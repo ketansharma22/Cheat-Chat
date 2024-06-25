@@ -23,3 +23,7 @@ export const signupValidator=[
     body("email").trim().isEmail().withMessage("invalid email address"),
     body("password").isLength({min:6}).withMessage("password must be 6 characters"),
 ]
+export const chatCompletionValidator=[
+    body("message").notEmpty().withMessage("message is required"),
+   
+]
