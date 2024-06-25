@@ -16,8 +16,9 @@ export function useAuth() {
           async function checkStatus(){
             const data=await checkAuthStatus()
             if(data){
-            setUser({email:data.Email,name:data.Name})
+            setUser({email:data.email,name:data.name})
             setIsLoggedIn(true)
+            
             }
             
           }
@@ -28,7 +29,7 @@ export function useAuth() {
           const data=await userLogin(email,password)
           console.log(data);
           if (data) {
-            setUser({email:data.Email,name:data.Name})
+            setUser({email:data.email,name:data.name})
             setIsLoggedIn(true)
           }
         }
