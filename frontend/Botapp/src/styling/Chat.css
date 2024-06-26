@@ -58,9 +58,32 @@ h2 ,h3{
 
 #rightchatmain{
     width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
     height: 98%;
     border-radius: 30px;
     margin: 10px;
     margin-bottom:20px;
-    border: 1px solid rgb(121, 117, 117);
+    
+}
+#chatsection{
+    width: 98%;
+    height: 75%;
+    overflow-y:auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: smooth;
+}
+#inputsubmit{
+    width: 97%;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    
+    
+    
 }

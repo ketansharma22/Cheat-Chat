@@ -9,7 +9,7 @@ export const userLogin=async(email,password)=>{
     return data
 }
 export const userSignUp=async(name,email,password)=>{
-    const res=await axios.post("users/signup",{name,email,password})
+    const res=await axios.post("/users/signup",{name,email,password})
     const data=await res.data
     return data
     
@@ -32,4 +32,15 @@ export const logoutUser=async()=>{
     }
     const data=await res.data
     return data
+}
+
+export const sendChatRequest=async(message)=>{
+    console.log(message);
+    const res= await axios.post("/chats/new",{message})
+    if (res.status !== 200) {
+        throw new Error("Unable to send chat");
+      }
+      console.log("noerrin api comm");
+      const data = await res.data;
+      return data;
 }

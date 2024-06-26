@@ -44,7 +44,7 @@ function Home() {
         <img src={logo} />
         {auth.isLoggedIn ? (
           <>
-          <h1>Welcome Back </h1>
+          <h1>Welcome Back <span>{auth.user.name}</span> Good to see u</h1>
             <div id="buttonss">
             <Link to="/chat">
               <button style={{ color: "white" }}>Go to Chat </button>

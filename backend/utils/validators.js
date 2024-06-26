@@ -2,12 +2,13 @@ import {body, validationResult,check} from 'express-validator'
 
 export const validate=validations=>{
     return async(req,res,next)=>{
-        console.log("helo");
+        console.log("validator");
         for(let validation of validations){
+            if(typeof validation.run ==='function'){
             const result= await validation.run(req)
             if(!result.isEmpty()){
                 break;
-            }
+            }}
         
         }   
         const errors=validationResult(req)
