@@ -2,6 +2,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.15.20",
     "@react-icons/all-files": "^4.1.0",
-    "openai": "^4.52.0"
+    "openai": "^4.52.0",
+    "react-syntax-highlighter": "^15.5.0"
   }
 }

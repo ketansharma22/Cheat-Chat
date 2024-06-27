@@ -1,15 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import logo from "../images/logocirclewhite.png";
 import "../styling/Chat.css";
+import toast from "react-hot-toast";
 import { ChatItem } from "../component/ChatItem";
 import send from '../images/send.png'
-import { sendChatRequest } from "../helpers/api_communicators";
+import { chatDelete, getUserChats, sendChatRequest } from "../helpers/api_communicators";
 
 
 function Chat() {
   const[chatMessages,setChatMessages]=useState([])
+  const auth = useAuth();
   const inputref=useRef(null)
   const handlesubmit=async(e)=>{
     e.preventDefault()
@@ -20,11 +22,40 @@ function Chat() {
     const newMessage={role:"user",content:content}
     setChatMessages((prev)=>[...prev , newMessage])
     const chatData=await sendChatRequest(content)
-    setChatMessages(...chatData.chats)
+    setChatMessages([...chatData.chats])
     console.log(content);
   }
+  useLayoutEffect(()=>{
+    if(auth.user && auth.isLoggedIn){
+      toast.loading("loading chats",{id:"loadchats"})
+      getUserChats().then((data)=>{
+        setChatMessages([...data.chats])
+          toast.success("no chats to show",{id:"loadchats"})
+        console.log(chatMessages);
+        toast.success("Chats Loaded",{id:"loadchats"})
+      }).catch((error)=>{
+        console.log(error)
+        toast.error("loading failed",{id:"loadchats"})
+      })
+    }
+  },[])
 
-  const auth = useAuth();
+  const deleteChats=async()=>{
+    try{
+      toast.loading("Deleting chats ..",{id:"deletechats"})
+      await chatDelete()
+      setChatMessages([])
+      toast.success("Deleted Chats Successfully", { id: "deletechats" });
+
+    } 
+    catch{
+      console.log(error);
+      toast.error("Deleting chats failed", { id: "deletechats" });
+    }
+  }
+
+
+  
   return (
     <div id="chatss">
       <nav id="chatnav">
@@ -69,8 +100,8 @@ function Chat() {
             You can ask some questions related to Knowledge, Business, Advices,
             Education, etc. But avoid sharing personal information
           </h2>
-          <button style={{ width: 200, background: "white" }}>
-            Clear Conversation{" "}
+          <button onClick={deleteChats} style={{ width: 200, background: "white" }}>
+            Clear Conversation
           </button>
         </section>
 

@@ -2,6 +2,8 @@ import React from "react";
 import "../styling/ChatItem.css";
 import ailogo from "../images/logocirclewhite.png";
 import { useAuth } from "../Context/AuthContext";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 export const ChatItem = ({content, role}) => {
   const auth = useAuth();
   return role == "asistant" ? (
