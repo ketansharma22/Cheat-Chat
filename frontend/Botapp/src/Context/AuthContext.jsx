@@ -38,6 +38,7 @@ export function useAuth() {
           const data=await userSignUp(name,email,password)
           if(data){
             setUser({email:data.Email,name:data.Name})
+            console.log(user);
             setIsLoggedIn(true)
           }
         }

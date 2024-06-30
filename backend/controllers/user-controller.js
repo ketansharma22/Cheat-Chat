@@ -16,12 +16,14 @@ export const getAllUsers=async(req,res,next)=>{
 
 export const userSignup=async(req,res,next)=>{
     try{    
+        console.log("signup");
         const {name,email,password}= req.body;
         const existingUser=await usersModel.findOne({email})
         if(existingUser) return res.status(401).send("user already exists")
         const hashedPass= await hash(password,10)
         const user=new usersModel({name,email,password:hashedPass})
         await user.save()
+        console.log("saved");
 
         //for signup 
         res.clearCookie("auth_token",{
@@ -34,7 +36,7 @@ export const userSignup=async(req,res,next)=>{
         const token=createToken(user._id.toString(),user.email,"7d")
         const expires=new Date()
         expires.setDate(expires.getDate()+7)
-        res.cookie("auth_token",token,
+        res.status(200).cookie(COOKIE_NAME,token,
         {
             path:'/',
             domain:"localhost",

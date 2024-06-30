@@ -11,9 +11,12 @@ export const createToken= (id,email,expiresIn)=>{
 }
 export const verifyToken=async(req,res,next)=>{
     const token=req.signedCookies[`${Cokiename}`]
+    console.log(token);
     console.log("tokenmanager");
     if (!token || token.trim() === "") {
+        console.log("eror");
         return res.status(401).json({ message: "Token Not Received" });
+        console.log("errorpakka");
       }
       console.log(token);
       return new Promise((resolve, reject) => {

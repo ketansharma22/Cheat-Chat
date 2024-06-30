@@ -20,6 +20,7 @@ export const validate=validations=>{
 }
 
 export const signupValidator=[
+    
     body("name").notEmpty().withMessage("name is required"),
     body("email").trim().isEmail().withMessage("invalid email address"),
     body("password").isLength({min:6}).withMessage("password must be 6 characters"),

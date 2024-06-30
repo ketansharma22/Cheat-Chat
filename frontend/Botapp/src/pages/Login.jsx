@@ -20,7 +20,7 @@ function Login() {
 
   async function handleSubmit(e){
     e.preventDefault()
-     setFormData({email:email,password:password})
+     setFormData({Email:email,Password:password})
     console.log(formData);
     const em= formData.Email
     const pass=formData.Password
