@@ -28,18 +28,7 @@ export const generateChatCompletion = async (req, res, next) => {
     chats.push({ content: message, role: "user" });
     user.chats.push({ content: message, role: "user" });
     
-    //send all chats to openAI API
-    // const config = configureOpenAI();
-    // const openai = new OpenAI({
-    //   apiKey: process.env.OPEN_AI_SECRET,
-    //   organization: process.env.ORGANIZATION_ID,
-    // });
-    // const chatResponse = await openai.chat.completions.create({
-    //   model: "gpt-3.5-turbo",
-    //   messages: chats,
-    // });
-    // user.chats.push(chatResponse.data.choices[0].message);
-
+    
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" ,messages:chats});
     try {
@@ -47,14 +36,15 @@ export const generateChatCompletion = async (req, res, next) => {
       const response = await result.response;
 
       const text = response.text();
-      user.chats.push({content :text,role:"ai"})
+      user.chats.push({content :text,role:"asistant"})
+      console.log(text);
     } catch(error) {
       console.error(error);
       res.status(500).send('Error generating content');
     }
 
     
-    console.log(text);
+    
 
     await user.save();
     console.log(user.chats);

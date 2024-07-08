@@ -100,7 +100,7 @@ function Chat() {
             You can ask some questions related to Knowledge, Business, Advices,
             Education, etc. But avoid sharing personal information
           </h2>
-          <button onClick={deleteChats} style={{ width: 200, background: "white" }}>
+          <button onClick={deleteChats} style={{ width: 200,marginBottom:20, background: "white" }}>
             Clear Conversation
           </button>
         </section>
@@ -115,7 +115,7 @@ function Chat() {
           <div id="inputsubmit">
             <input ref={inputref} type="text" style={{width:"90%",marginRight:40,background:"rgb(35, 35, 35)",border:"2px solid rgb(121, 117, 117)",color:"whitesmoke",fontWeight:"bolder",paddingLeft:20,borderRadius:15,fontSize:"large"}} />
             
-            <img  type="submit" onClick={handlesubmit} style={{width:25,marginRight:20}} src={send} />
+            <img  type="submit" onClick={handlesubmit} style={{width:25,marginRight:20,cursor:"pointer"}} src={send} />
           </div>
         </section>
       </section>
