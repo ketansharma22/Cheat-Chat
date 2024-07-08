@@ -2,6 +2,7 @@
 import usersModel from "../models/usersModel.js";
 import { OpenAI } from "openai";
 import { config } from "dotenv";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 config();
 
 export const generateChatCompletion = async (req, res, next) => {
@@ -26,7 +27,7 @@ export const generateChatCompletion = async (req, res, next) => {
 
     chats.push({ content: message, role: "user" });
     user.chats.push({ content: message, role: "user" });
-
+    
     //send all chats to openAI API
     // const config = configureOpenAI();
     // const openai = new OpenAI({
@@ -38,9 +39,26 @@ export const generateChatCompletion = async (req, res, next) => {
     //   messages: chats,
     // });
     // user.chats.push(chatResponse.data.choices[0].message);
+
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" ,messages:chats});
+    try {
+      const result = await model.generateContent(message);
+      const response = await result.response;
+
+      const text = response.text();
+      user.chats.push({content :text,role:"ai"})
+    } catch(error) {
+      console.error(error);
+      res.status(500).send('Error generating content');
+    }
+
+    
+    console.log(text);
+
     await user.save();
     console.log(user.chats);
-    return res.status(200).json({ chats: user.chats })  ;
+    return res.status(200).json({ chats: user.chats });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "something went wrong" });
@@ -62,13 +80,13 @@ export const sendChatsToUser = async (req, res, next) => {
     }
     console.log("into controlr");
     return res.status(200).json({ message: "OK", chats: user.chats });
-  } catch(error) {
+  } catch (error) {
     console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message })
+    return res.status(200).json({ message: "ERROR", cause: error.message });
   }
 };
 
-export const deleteChatss=async(req,res,next)=>{
+export const deleteChatss = async (req, res, next) => {
   try {
     const user = await usersModel.findById(res.locals.jwtData.id);
     if (!user) {
@@ -80,13 +98,11 @@ export const deleteChatss=async(req,res,next)=>{
       return res.status(401).send("Permissions didn't match");
     }
 
-    user.chats=[]
-    await user.save()
+    user.chats = [];
+    await user.save();
     console.log(user.chats);
     return res.status(200).json({ message: "OK" });
-  
-  }
-  catch(error){
+  } catch (error) {
     console.log(error);
   }
-}
+};
