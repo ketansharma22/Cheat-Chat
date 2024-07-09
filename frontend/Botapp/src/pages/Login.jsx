@@ -7,6 +7,7 @@ import { useAuth } from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  
   const navigate=useNavigate()
   const auth=useAuth()
   const[email,setEmail]=useState("")
@@ -16,7 +17,11 @@ function Login() {
     Password:"",
   })
 
-  
+  async function forgotPassword(e){
+    e.preventDefault()
+    navigate('/forgotpass')
+    console.log("forgot");
+  }
 
   async function handleSubmit(e){
     e.preventDefault()
@@ -48,7 +53,7 @@ function Login() {
   },[auth])
 
   return (
-    <div id="loginpage">
+    <div style={{display:"flex",flexDirection:"column"}} id="loginpage">
       <form id="boxlogin" onSubmit={handleSubmit}>
         <img id="logoimage" src={logo} />
         <h1>Welcome Back !!</h1>
@@ -86,6 +91,7 @@ function Login() {
             </span></p>
         </div>
       </form>
+      {/* <button onClick={forgotPassword}>Forgot password</button> */}
     </div>
   )
 }

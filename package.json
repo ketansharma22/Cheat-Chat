@@ -3,6 +3,10 @@
     "@google/generative-ai": "^0.14.1",
     "@mui/icons-material": "^5.15.20",
     "@react-icons/all-files": "^4.1.0",
+    "@react-oauth/google": "^0.12.1",
+    "appwrite": "^15.0.0",
+    "nodemailer": "^6.9.14",
+    "oauth": "^0.10.0",
     "openai": "^4.52.0",
     "react-syntax-highlighter": "^15.5.0"
   }

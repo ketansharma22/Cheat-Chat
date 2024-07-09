@@ -1,5 +1,5 @@
 import React from 'react'
-import { checkAuthStatus, logoutUser, userLogin, userSignUp } from '../helpers/api_communicators'
+import { checkAuthStatus, forgotPass, logoutUser, userLogin, userSignUp } from '../helpers/api_communicators'
 import  { useContext,useState } from 'react'
 import { useEffect } from 'react'
 const AuthContext=React.createContext()
@@ -42,6 +42,12 @@ export function useAuth() {
             setIsLoggedIn(true)
           }
         }
+        const forgot=async(email)=>{
+          const data =await forgotPass(email)
+          if(data){
+            console.log(data);
+          }
+        }
         const logout=async()=>{
           await logoutUser()
           setIsLoggedIn(false)
@@ -56,6 +62,7 @@ export function useAuth() {
         login,
         signup,
         logout,
+        forgot,
       }
 return <AuthContext.Provider value={value} >{children}</AuthContext.Provider>
 

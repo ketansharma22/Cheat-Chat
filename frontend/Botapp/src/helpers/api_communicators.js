@@ -14,6 +14,12 @@ export const userSignUp=async(name,email,password)=>{
     return data
     
 }
+export const forgotPass=async(email)=>{
+    const res=await axios.post("/users/forgot",{email})
+    const data=await res.data
+    return data
+    
+}
 export const checkAuthStatus=async()=>{
     const res=await axios.get("/users/auth-status")
     if(res.status!=200){

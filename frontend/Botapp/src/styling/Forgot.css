@@ -1,0 +1,22 @@
+#forgot{
+    width: 100vw;
+    background: whitesmoke;
+    color: black;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#forgotform{
+    width: 400px;
+    background: whitesmoke;
+    border-radius: 10px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    border: 2px solid silver;
+}

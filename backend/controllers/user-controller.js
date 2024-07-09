@@ -2,6 +2,7 @@ import usersModel from "../models/usersModel.js"
 import {hash,compare} from 'bcrypt'
 import { createToken } from "../utils/token-manager.js"
 import { COOKIE_NAME } from "../utils/constants.js"
+import { createTransport } from "nodemailer"
 
 export const getAllUsers=async(req,res,next)=>{
     try{    
@@ -146,4 +147,17 @@ export const userLogout=async(req,res,next)=>{
         console.log(error);
         return res.status(200).json({ message: "ERROR", cause: error.message });
     }
+}
+
+export const forgotton=async(req,res,next)=>{
+    const {email}=req.body
+    const user=await usersModel.findById(res.locals.jwt.id)
+    if(!user){
+        return res.status(401).send("User not registered OR Token malfunctioned");
+    }
+    if (user._id.toString() !== res.locals.jwtData.id) {
+        return res.status(401).send("Permissions didn't match");
+      }
+
+      const transporter=nodemailer.createTransport(transport[defaults])
 }
