@@ -8,6 +8,13 @@
     "nodemailer": "^6.9.14",
     "oauth": "^0.10.0",
     "openai": "^4.52.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "vercel": "^34.3.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
 }
