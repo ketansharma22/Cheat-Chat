@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 export const userLogin=async(email,password)=>{
-    const res=await axios.post("/api/v1/users/login",{email,password})
+    const res=await axios.post("/users/login",{email,password})
     if(res.status==401 && res.status==403){
         throw new Error("Unable To Login")
     }
@@ -9,19 +9,19 @@ export const userLogin=async(email,password)=>{
     return data
 }
 export const userSignUp=async(name,email,password)=>{
-    const res=await axios.post("/api/v1/users/signup",{name,email,password})
+    const res=await axios.post("/users/signup",{name,email,password})
     const data=await res.data
     return data
     
 }
 export const forgotPass=async(email)=>{
-    const res=await axios.post("/api/v1/users/forgot",{email})
+    const res=await axios.post("/users/forgot",{email})
     const data=await res.data
     return data
     
 }
 export const checkAuthStatus=async()=>{
-    const res=await axios.get("/api/v1/users/auth-status")
+    const res=await axios.get("/users/auth-status")
     if(res.status!=200){
         throw new Error("Unable to Authenticate")
     }
@@ -32,7 +32,7 @@ export const checkAuthStatus=async()=>{
 
 
 export const logoutUser=async()=>{
-    const res=await axios.get("/api/v1/users/logout")
+    const res=await axios.get("/users/logout")
     if(res.status !== 200){
         throw new Error("Unable to logout")
     }
@@ -42,7 +42,7 @@ export const logoutUser=async()=>{
 
 export const sendChatRequest=async(message)=>{
     console.log(message);
-    const res= await axios.post("/api/v1/chats/new",{message})
+    const res= await axios.post("/chats/new",{message})
     if (res.status !== 200) {
         throw new Error("Unable to send chat");
       }
@@ -51,7 +51,7 @@ export const sendChatRequest=async(message)=>{
       return data;
 }
 export const getUserChats=async()=>{
-    const res=await axios.get("/api/v1/chats/allChats")
+    const res=await axios.get("/chats/allChats")
     if(res.status!==200){
         throw new Error("Unable to send chat");
     }
@@ -62,7 +62,7 @@ export const getUserChats=async()=>{
 }
 
 export const chatDelete=async()=>{
-    const res=await axios.delete("/api/v1/chats/delete")
+    const res=await axios.delete("/chats/delete")
     if(res.status!==200){
         throw new Error("unable to delete chats")
     }

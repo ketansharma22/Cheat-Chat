@@ -12,9 +12,7 @@ app.use(cors({origin:"http://localhost:5173", credentials:true}))
 app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(morgan("dev"))
-app.get("/",(req,res)=>{
-    res.send("welcome")
-})
-app.use('/api/v1',appRouter)
+app.use('/',appRouter)
+
 
 export default app;
