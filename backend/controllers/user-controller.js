@@ -2,7 +2,7 @@ import usersModel from "../models/usersModel.js"
 import {hash,compare} from 'bcrypt'
 import { createToken } from "../utils/token-manager.js"
 import { COOKIE_NAME } from "../utils/constants.js"
-import { createTransport } from "nodemailer"
+// import { createTransport } from "nodemailer"
 
 export const getAllUsers=async(req,res,next)=>{
     try{    
