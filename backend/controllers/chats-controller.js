@@ -1,6 +1,6 @@
 // import { configureOpenAI } from "../conifg/openai-config.js";
 import usersModel from "../models/usersModel.js";
-import { OpenAI } from "openai";
+// import { OpenAI } from "openai";
 import { config } from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 config();
