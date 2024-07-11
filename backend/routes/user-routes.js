@@ -8,5 +8,5 @@ userRoutes.post('/signup',validate(signupValidator),userSignup)
 userRoutes.post('/login',userLogin)
 userRoutes.get('/auth-status',verifyToken,verifyUser)
 userRoutes.get('/logout',verifyToken,userLogout)
-userRoutes.post('/forgot',verifyToken)
+// userRoutes.post('/forgot',verifyToken)
 export default userRoutes   
