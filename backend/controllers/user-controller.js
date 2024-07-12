@@ -30,7 +30,7 @@ export const userSignup=async(req,res,next)=>{
         res.clearCookie("auth_token",{
             httpOnly:true,
             signed:true,
-            secure:true,
+        
         })
 
         const token=createToken(user._id.toString(),user.email,"7d")
@@ -38,7 +38,7 @@ export const userSignup=async(req,res,next)=>{
         expires.setDate(expires.getDate()+7)
         res.status(200).cookie(COOKIE_NAME,token,
         {
-            secure:true,
+        
             expires,
             httpOnly:true,
             signed:true,
@@ -70,7 +70,7 @@ export const userLogin=async(req,res,next)=>{
         res.clearCookie(COOKIE_NAME,{
             httpOnly:true,
             signed:true,
-            secure:true,
+            
         })  
 
         const token=createToken(user._id.toString(),user.email,"7d")
@@ -84,7 +84,7 @@ export const userLogin=async(req,res,next)=>{
             expires,
             httpOnly:true,
             signed:true,
-            secure:true,
+            
         })
         res.send({message:"loginsuccess" ,name:user.name ,email:user.email })
 
@@ -132,7 +132,7 @@ export const userLogout=async(req,res,next)=>{
           res.clearCookie(COOKIE_NAME, {
             httpOnly: true,
             signed: true,
-            secure:true,
+            
           })
 
           return res.status(200).json({message:"ok",name:user.name,email:user.email})
