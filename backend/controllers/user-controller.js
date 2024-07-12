@@ -28,10 +28,9 @@ export const userSignup=async(req,res,next)=>{
 
         //for signup 
         res.clearCookie("auth_token",{
-            domain:"https://cheat-chat-production.up.railway.app/",
             httpOnly:true,
             signed:true,
-            path:'/',
+            secure:true,
         })
 
         const token=createToken(user._id.toString(),user.email,"7d")
@@ -39,8 +38,7 @@ export const userSignup=async(req,res,next)=>{
         expires.setDate(expires.getDate()+7)
         res.status(200).cookie(COOKIE_NAME,token,
         {
-            path:'/',
-            domain:"https://cheat-chat-production.up.railway.app/",
+            secure:true,
             expires,
             httpOnly:true,
             signed:true,
@@ -70,10 +68,9 @@ export const userLogin=async(req,res,next)=>{
         
 
         res.clearCookie(COOKIE_NAME,{
-            domain:"https://cheat-chat-production.up.railway.app/",
             httpOnly:true,
             signed:true,
-            path:'/',
+            secure:true,
         })  
 
         const token=createToken(user._id.toString(),user.email,"7d")
@@ -84,12 +81,10 @@ export const userLogin=async(req,res,next)=>{
 
         res.status(200).cookie(COOKIE_NAME,token,
         {
-            path:'/',
-            domain:"https://cheat-chat-production.up.railway.app/",
             expires,
             httpOnly:true,
             signed:true,
-            secure:false,
+            secure:true,
         })
         res.send({message:"loginsuccess" ,name:user.name ,email:user.email })
 
@@ -136,9 +131,8 @@ export const userLogout=async(req,res,next)=>{
           }
           res.clearCookie(COOKIE_NAME, {
             httpOnly: true,
-            domain: "https://cheat-chat-production.up.railway.app/",
             signed: true,
-            path: "/",
+            secure:true,
           })
 
           return res.status(200).json({message:"ok",name:user.name,email:user.email})
