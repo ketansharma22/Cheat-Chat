@@ -18,3 +18,5 @@ app.get("/",(req,res)=>{
 app.use('/api/v1',appRouter)
 
 export default app;
+
+//https://cheat-chat-production.up.railway.app/
