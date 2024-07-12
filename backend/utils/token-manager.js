@@ -15,7 +15,7 @@ export const verifyToken=async(req,res,next)=>{
     console.log("tokenmanager");
     if (!token || token.trim() === "") {
         console.log("eror");
-        return res.status(401).json({ message: "Token Not Received",token });
+        return res.status(401).json({ message: "Token Not Received" });
         console.log("errorpakka");
       }
       console.log(token);
