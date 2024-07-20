@@ -5,8 +5,9 @@ config()
 const Cokiename="authtoken"  
 export const createToken= (id,email,expiresIn)=>{
     const token=jwt.sign({id:id,email:email},process.env.JWT_SECRET ,{
-        expiresIn:expiresIn,
+        expiresIn:expiresIn
     })
+    console.log(token);
     return token;
 }
 export const verifyToken=async(req,res,next)=>{
