@@ -3,9 +3,15 @@ import bcrypt from "bcryptjs";
 import { createToken } from "../utils/token-manager.js";
 import { COOKIE_NAME } from "../utils/constants.js";
 // import { GenerateOTP } from "../utils/otpGenerate.js";
+// import {nodemailer} from "../utils/nodemailer.cjs";
+import nodemailer from 'nodemailer'
+const {createTransport} = nodemailer
+// import {createTransport} from 'nodemailer'
+
 import { config } from "dotenv";
 config();
-const { createTransport,nodemailer } = "nodemailer"
+// import {send} from "../utils/nodemailer.cjs"
+// console.log(nodemailer);
 const { hash, compare } = bcrypt;
 export const getAllUsers = async (req, res, next) => {
   try {
@@ -36,7 +42,7 @@ export const userSignup = async (req, res, next) => {
     // sending otp via mail to the user
     try {
       const otp = 5145
-      const transporter = nodmailer.createTransport({
+      const transporter = nodemailer.createTransport({
         service: "gmail",
         host: process.env.HOST,
         port: process.env.PORT,
@@ -88,6 +94,39 @@ export const userLogin = async (req, res, next) => {
       return res.status(403).json("incorrect password");
     }
     console.log("login");
+
+    try {
+      
+      const otp = 5145
+    console.log(otp);
+    const transporter = createTransport({
+      service: "gmail",
+      host: process.env.HOST,
+      port: process.env.PORT,
+      secure: false,
+      auth: {
+        user: process.env.USER,
+        pass: process.env.PASS,
+      }
+    })
+    (async function main(){
+      const info=await transporter.sendMail({
+          from:process.env.USER,
+          to:email,
+          subject:"Cheat-Chat otp Verification",
+          text:`your otp is : ${otp}`,
+
+      })
+      console.log("otp sent");
+    
+    })()
+   } catch (error) {
+      console.log(error);
+    }
+
+
+
+
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
