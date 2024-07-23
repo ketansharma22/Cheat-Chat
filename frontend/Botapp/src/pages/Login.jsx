@@ -91,7 +91,7 @@ function Login() {
             </span></p>
         </div>
       </form>
-      {/* <button onClick={forgotPassword}>Forgot password</button> */}
+       <button onClick={forgotPassword}>Forgot password</button> 
     </div>
   )
 }

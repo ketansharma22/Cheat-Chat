@@ -2,13 +2,10 @@ import usersModel from "../models/usersModel.js";
 import bcrypt from "bcryptjs";
 import { createToken } from "../utils/token-manager.js";
 import { COOKIE_NAME } from "../utils/constants.js";
-// import { GenerateOTP } from "../utils/otpGenerate.js";
-// import {nodemailer} from "../utils/nodemailer.cjs";
 import nodemailer from 'nodemailer'
-const {createTransport} = nodemailer
-// import {createTransport} from 'nodemailer'
 
 import { config } from "dotenv";
+import { sendEmail } from "../utils/nodemailer.js";
 config();
 // import {send} from "../utils/nodemailer.cjs"
 // console.log(nodemailer);
@@ -201,13 +198,17 @@ export const userLogout = async (req, res, next) => {
 
 export const forgotton = async (req, res, next) => {
   const { email } = req.body;
-  const user = await usersModel.findById(res.locals.jwt.id);
+  const user = await usersModel.findOne(email)
   if (!user) {
     return res.status(401).send("User not registered OR Token malfunctioned");
   }
-  if (user._id.toString() !== res.locals.jwtData.id) {
-    return res.status(401).send("Permissions didn't match");
-  }
+try{
+  sendEmail(email)
+}
+catch(error){
+  console.log(error);
+}
 
-  const transporter = nodemailer.createTransport(transport[defaults]);
+
+  console.log("Doneee");
 };

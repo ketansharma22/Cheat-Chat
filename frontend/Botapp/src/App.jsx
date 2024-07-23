@@ -5,7 +5,7 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import { useAuth } from './Context/AuthContext'
 import Chat from './pages/Chat'
-// import Forgot from './pages/Forgot'
+import Forgot from './pages/Forgot'
 function App() {
 const auth=useAuth()
   return(
@@ -20,7 +20,7 @@ const auth=useAuth()
             <Route path='/chat' element={<Chat/>} />
           )
         }
-        {/* <Route path='/forgotpass' element={<Forgot/>}/> */}
+        <Route path='/forgotpass' element={<Forgot/>}/>
         
       </Routes>
     </div>
