@@ -12,9 +12,14 @@ function VerifyOtp() {
   const { name, value } = e.target;
   setFormData((prevUser) => ({ ...prevUser, [name]: value }));
 };
-const handleSubmit = (e) => {
+const handleSubmit = async(e) => {
   e.preventDefault();
   console.log(formData);
+  try {
+    
+  } catch (error) {
+    
+  }
 };
   return (
     <form
