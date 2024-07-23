@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import { useAuth } from './Context/AuthContext'
 import Chat from './pages/Chat'
 import Forgot from './pages/Forgot'
+import VerifyOtp from './pages/VerifyOtp'
 function App() {
 const auth=useAuth()
   return(
@@ -21,6 +22,10 @@ const auth=useAuth()
           )
         }
         <Route path='/forgotpass' element={<Forgot/>}/>
+        
+        <Route path='/verifyotp' element={<VerifyOtp/>}/>
+
+        
         
       </Routes>
     </div>

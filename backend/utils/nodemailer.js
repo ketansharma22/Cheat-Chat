@@ -20,8 +20,7 @@ try {
       from:"process.env.USER",
       to: email.email,
       subject:"Cheat-Chat otp verification ",
-      text:`DO NOT SHARE WITH ANYONE 
-      your 6 otp is : ${otp}`,
+      text:`your 6 otp is : ${otp}`,
     })
 } catch (error) {
   console.log(error);

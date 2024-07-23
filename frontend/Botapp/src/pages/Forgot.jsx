@@ -16,10 +16,12 @@ const Forgot = () => {
     e.preventDefault()
     console.log(formData);
     try {
-        await auth.forgot(formData)
-        
+        toast.loading("Processing",{id:"forgot"})
+        const res=await auth.forgot(formData)
+        toast.success(`OTp sent to ${formData.email}`,{id:"forgot"})
+        navigate('/verifyotp')
     } catch (error) {
-     console.log(error);   
+        console.log(error);
     }
   }
 

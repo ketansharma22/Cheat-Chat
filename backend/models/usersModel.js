@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  otp:{
+    type:String,
+  },
+  otpexpiry:{
+    type:Date,
+  },
   chats: [chatsSchema],
 });
 

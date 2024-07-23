@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs";
 import { createToken } from "../utils/token-manager.js";
 import { COOKIE_NAME } from "../utils/constants.js";
 import nodemailer from 'nodemailer'
-
 import { config } from "dotenv";
 import { sendEmail } from "../utils/nodemailer.js";
 config();
@@ -204,6 +203,7 @@ export const forgotton = async (req, res, next) => {
   }
 try{
   sendEmail(email)
+  res.status(200).send("otp sent successfullt")
 }
 catch(error){
   console.log(error);
