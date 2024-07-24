@@ -1,5 +1,5 @@
 import React from 'react'
-import { checkAuthStatus, forgotPass, logoutUser, userLogin, userSignUp } from '../helpers/api_communicators'
+import { checkAuthStatus, forgotPass, logoutUser, userLogin, userSignUp, verify } from '../helpers/api_communicators'
 import  { useContext,useState } from 'react'
 import { useEffect } from 'react'
 const AuthContext=React.createContext()
@@ -55,6 +55,12 @@ export function useAuth() {
           setUser(null)
           window.location.reload()
         }
+        const verifyOTP=async()=>{
+          const data= await verify()
+          if(data){
+            console.log(data);
+          }
+        }
 
         const value={
         user,
@@ -63,6 +69,7 @@ export function useAuth() {
         signup,
         logout,
         forgot,
+        verifyOTP,
       }
 return <AuthContext.Provider value={value} >{children}</AuthContext.Provider>
 

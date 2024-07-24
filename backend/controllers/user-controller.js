@@ -4,7 +4,7 @@ import { createToken } from "../utils/token-manager.js";
 import { COOKIE_NAME } from "../utils/constants.js";
 import nodemailer from 'nodemailer'
 import { config } from "dotenv";
-import { sendEmail } from "../utils/nodemailer.js";
+import {  sendEmail } from "../utils/nodemailer.js";
 config();
 // import {send} from "../utils/nodemailer.cjs"
 // console.log(nodemailer);
@@ -202,8 +202,9 @@ export const forgotton = async (req, res, next) => {
     return res.status(401).send("User not registered OR Token malfunctioned");
   }
 try{
-  sendEmail(email)
+  const result =await sendEmail(email)
   res.status(200).send("otp sent successfullt")
+  
 }
 catch(error){
   console.log(error);
@@ -212,3 +213,9 @@ catch(error){
 
   console.log("Doneee");
 };
+
+
+export const verifyy=async(req,res,next)=>{
+
+  console.log(email);
+}

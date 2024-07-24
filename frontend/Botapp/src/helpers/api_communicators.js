@@ -20,6 +20,12 @@ export const forgotPass=async(email)=>{
     return data
     
 }
+export const verify =async()=>{
+    console.log("helo");
+    const res=await axios.get("/users/verify")
+    const data=await res.data
+    return data
+}
 export const checkAuthStatus=async()=>{
     const res=await axios.get("/users/auth-status")
     if(res.status!=200){

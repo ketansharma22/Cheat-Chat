@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+import toast from "react-hot-toast";
 
 
 
 function VerifyOtp() {
+  const auth=useAuth()
   const [otp,setOtp] = useState("");
   const [formData,setFormData] = useState({
     otp: "",
@@ -16,9 +19,11 @@ const handleSubmit = async(e) => {
   e.preventDefault();
   console.log(formData);
   try {
-    
+    toast.loading("Verifying",{id:"verify"})
+      const res=await auth.verifyOTP(formData)
+      toast.success("Verified Successfully",{id:"verify"})
   } catch (error) {
-    
+    console.log(error);
   }
 };
   return (
