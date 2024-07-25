@@ -55,8 +55,9 @@ export function useAuth() {
           setUser(null)
           window.location.reload()
         }
-        const verifyOTP=async()=>{
-          const data= await verify()
+        const verifyOTP=async(otp)=>{
+          console.log(otp);
+          const data= await verify(otp)
           if(data){
             console.log(data);
           }

@@ -216,6 +216,6 @@ catch(error){
 
 
 export const verifyy=async(req,res,next)=>{
-
-  console.log(email);
+  const {otp,email}=req.body
+  console.log(otp,email);
 }

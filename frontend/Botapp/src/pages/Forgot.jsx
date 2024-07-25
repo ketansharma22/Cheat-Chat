@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styling/Forgot.css";
 import { useNavigate } from "react-router-dom";
+
 import toast from "react-hot-toast";
 import { useAuth } from "../Context/AuthContext";
 const Forgot = () => {
@@ -19,7 +20,8 @@ const Forgot = () => {
         toast.loading("Processing",{id:"forgot"})
         const res=await auth.forgot(formData)
         toast.success(`OTp sent to ${formData.email}`,{id:"forgot"})
-        navigate('/verifyotp')
+        localStorage.setItem('email',formData.email)
+        navigate('/verifyotp' )
     } catch (error) {
         console.log(error);
     }

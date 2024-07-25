@@ -20,9 +20,10 @@ export const forgotPass=async(email)=>{
     return data
     
 }
-export const verify =async()=>{
+export const verify =async(otp)=>{
     console.log("helo");
-    const res=await axios.get("/users/verify")
+    const email=localStorage.getItem('email')
+    const res=await axios.post("/users/verify",{otp,email})
     const data=await res.data
     return data
 }
