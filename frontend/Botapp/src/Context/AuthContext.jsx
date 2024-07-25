@@ -61,6 +61,7 @@ export function useAuth() {
           if(data){
             console.log(data);
           }
+          return data
         }
 
         const value={

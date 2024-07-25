@@ -217,5 +217,17 @@ catch(error){
 
 export const verifyy=async(req,res,next)=>{
   const {otp,email}=req.body
-  console.log(otp,email);
+  const user=await usersModel.findOne({email})
+  if(!user){
+    return res.status(401).send("User not registered OR Token malfunctioned");
+  }
+  try {
+      if(otp==user.otp){
+        delete user.otp
+        return res.status(200).json({message:"otp verified successfully" ,success:true})
+      }
+      return res.status(401).json({message:"otp do not match",success:false})
+  } catch (error) {
+    console.log(error);
+  }
 }

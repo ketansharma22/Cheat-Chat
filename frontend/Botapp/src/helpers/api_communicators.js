@@ -21,7 +21,7 @@ export const forgotPass=async(email)=>{
     
 }
 export const verify =async(otp)=>{
-    console.log("helo");
+    console.log("helo");    
     const email=localStorage.getItem('email')
     const res=await axios.post("/users/verify",{otp,email})
     const data=await res.data

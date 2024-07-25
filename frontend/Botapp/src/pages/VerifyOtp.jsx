@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 function VerifyOtp() {
-
+const navigate=useNavigate()
   const auth=useAuth()
   const [otp,setOtp] = useState("");
   const [formData,setFormData] = useState({
@@ -24,10 +25,16 @@ const handleSubmit = async(e) => {
 
     toast.loading("Verifying",{id:"verify"})
       const res=await auth.verifyOTP(formData.otp)
-      toast.success("Verified Successfully",{id:"verify"})
+      if(res.status=200){
+        toast.success("Verified Successfully",{id:"verify"})
+        navigate('/signup',{replace:true })
+      }
+      else{
+        toast.error("otp do not match",{id:"verify"})
+      }
   } catch (error) {
-    toast.error(`${error.message}`,{id:"verify"})
-    console.log(error);
+    toast.error("an error occured",{id:"verify"})
+    console.log(error.message);
   }
 };
   return (
