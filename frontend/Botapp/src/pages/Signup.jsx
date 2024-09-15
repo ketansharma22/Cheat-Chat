@@ -24,8 +24,14 @@ function Signup() {
     console.log(formData);
     try{
       toast.loading("Signing in",{id:"signup toast"})
-      await auth.signup(formData.Name,formData.Email,formData.Password)
-      toast.success("signed in successfully",{id:"signup toast"})
+
+      const datas=await auth.forgot(formData.Email)  //basically send the otp
+
+
+      // await auth.signup(formData.Name,formData.Email,formData.Password)
+      localStorage.setItem('email',formData.Email)
+      navigate("/verifySignup",{replace:true,state:{name:formData.Name,email:formData.Email,password:formData.Password}})
+      toast.success("Otp sent",{id:"signup toast"})
     }
     catch(error){
       toast.error("signup Failed",{id:"signup toast"})
@@ -36,11 +42,11 @@ function Signup() {
     const { name, value } = e.target;
     setFormData((prevUser) => ({ ...prevUser, [name]: value }));
   };
-  useEffect(()=>{
-    if(auth.user){
-      return navigate("/chat")
-    }
-  },[auth])
+  // useEffect(()=>{
+  //   if(auth.user){
+  //     return navigate("/verifyotp")
+  //   }
+  // },[auth])
 
 
   return (

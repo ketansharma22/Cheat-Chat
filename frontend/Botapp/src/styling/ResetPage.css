@@ -1,0 +1,37 @@
+#resetmain{
+    width: screen;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#change{
+    width: max-content;
+    font-size: 18px;
+    height: max-content;
+    border-radius: 10px;
+    background-color: grey;
+}
+#resetmain label{
+    font-size: 20px;
+    font-weight: bolder;
+}
+#resetmain input{
+    background-color: grey;
+    color: black;
+}
+#resetmain input::placeholder{
+    color: black;
+    font-size: small;
+    font-weight: 400;
+}
+
+#change2{
+    width: max-content;
+    font-size: 10px;
+    height: max-content;
+    border-radius: 10px;
+    color: whitesmoke;
+}

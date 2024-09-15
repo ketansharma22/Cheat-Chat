@@ -21,7 +21,7 @@ const Forgot = () => {
         const res=await auth.forgot(formData)
         toast.success(`OTp sent to ${formData.email}`,{id:"forgot"})
         localStorage.setItem('email',formData.email)
-        navigate('/verifyotp' )
+        navigate('/verifyotp',{state:formData.email,replace:true} )
     } catch (error) {
         console.log(error);
     }

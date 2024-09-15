@@ -15,7 +15,7 @@ export const userSignUp=async(name,email,password)=>{
     
 }
 export const forgotPass=async(email)=>{
-    const res=await axios.post("/users/forgot",{email})
+    const res=await axios.post("/users/forgot",email)
     const data=await res.data
     return data
     
@@ -37,6 +37,12 @@ export const checkAuthStatus=async()=>{
     return data
 }
 
+export const resetFun=async(password,email)=>{
+    const res=await axios.post("/users/reset",{password,email})
+    const data=await res.data
+    console.log(data)
+    return data
+}
 
 export const logoutUser=async()=>{
     const res=await axios.get("/users/logout")

@@ -54,3 +54,17 @@ input{
     font-size: medium;
     
 }
+
+#forgotbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding:10px;
+    transition: all 0.3s;
+}
+#forgotbtn:hover{
+    background-color: rgba(38, 144, 117, 0.975);
+    color: rgb(255, 255, 255);
+    scale: 1.12;
+}

@@ -29,38 +29,21 @@ export const userSignup = async (req, res, next) => {
     await user.save();
     console.log("saved");
 
+    try {
+      const data=await sendEmail({email});
+      res.status(200).send("otp sent successfullt")
+
+    } catch (error) {
+      console.log(error);
+    }
+
     //for signup
     res.clearCookie("auth_token", {
       httpOnly: true,
       signed: true,
       // domain:"cheat-chat-production.up.railway.app",
     });
-    // sending otp via mail to the user
-    try {
-      const otp = 5145
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        host: process.env.HOST,
-        port: process.env.PORT,
-        secure: false,
-        auth: {
-          user: process.env.USER,
-          pass: process.env.PASS,
-        }
-      })
-      async function main(){
-        const info=await transporter.sendMail({
-            from:process.env.USER,
-            to:email,
-            subject:"Cheat-Chat otp Verification",
-            text:`your otp is : ${otp}`,
-
-        })
-        console.log("otp sent");
-      }
-    } catch (error) {
-        console.log(error);
-    }
+    
 
     const token = createToken(user._id.toString(), user.email, "7d");
     const expires = new Date();
@@ -89,40 +72,6 @@ export const userLogin = async (req, res, next) => {
     if (!isPassCorrect) {
       return res.status(403).json("incorrect password");
     }
-    console.log("login");
-
-    try {
-      
-      const otp = 5145
-    console.log(otp);
-    const transporter = createTransport({
-      service: "gmail",
-      host: process.env.HOST,
-      port: process.env.PORT,
-      secure: false,
-      auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
-      }
-    })
-    (async function main(){
-      const info=await transporter.sendMail({
-          from:process.env.USER,
-          to:email,
-          subject:"Cheat-Chat otp Verification",
-          text:`your otp is : ${otp}`,
-
-      })
-      console.log("otp sent");
-    
-    })()
-   } catch (error) {
-      console.log(error);
-    }
-
-
-
-
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
@@ -131,7 +80,6 @@ export const userLogin = async (req, res, next) => {
     });
 
     const token = createToken(user._id.toString(), user.email, "7d");
-    console.log(token);
 
     const expires = new Date();
     expires.setDate(expires.getDate() + 7);
@@ -231,3 +179,17 @@ export const verifyy=async(req,res,next)=>{
     console.log(error);
   }
 }
+
+export const resetPassword=async(req,res,next)=>{
+  const { password,email } =req.body
+  const user= await usersModel.findOne({email})
+  if(!user){
+    return res.status(401).send("User not registered OR Token malfunctioned");
+  }
+  try {
+        user.password=password;
+        return res.json({message:"Password Changed Successfully"})
+  } catch (error) {
+    return res.json({message:"Some error occured"})
+  }
+} 

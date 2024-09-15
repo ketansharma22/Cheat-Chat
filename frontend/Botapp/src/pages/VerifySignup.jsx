@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 
-function VerifyOtp() {
+function VerifySignup() {
 const navigate=useNavigate()
   const auth=useAuth()
   const [otp,setOtp] = useState("");
@@ -24,18 +24,22 @@ const {state}=location
 const handleSubmit = async(e) => {
   e.preventDefault();
   console.log(formData);
-
+    console.log(state.name);
   try {
-
     toast.loading("Verifying",{id:"verify"})
       const res=await auth.verifyOTP(formData.otp)
       if(res.status=200){
         toast.success("Verified Successfully",{id:"verify"})
-        navigate('/reset',{replace:true ,state:state })
       }
       else{
         toast.error("otp do not match",{id:"verify"})
       }
+
+      await auth.signup(state.name,state.email,state.password)
+      {auth.isLoggedIn ? navigate('/chat',{replace:true}) : "" }
+      toast.success("Signed in",{id:"verify"})
+      
+
   } catch (error) {
     toast.error("an error occured",{id:"verify"})
     console.log(error.message);
@@ -83,4 +87,4 @@ const handleSubmit = async(e) => {
   );
 }
 
-export default VerifyOtp;
+export default VerifySignup;
