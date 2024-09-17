@@ -35,14 +35,20 @@ const handleSubmit = async(e) => {
         toast.error("otp do not match",{id:"verify"})
       }
 
-      await auth.signup(state.name,state.email,state.password)
-      {auth.isLoggedIn ? navigate('/chat',{replace:true}) : "" }
-      toast.success("Signed in",{id:"verify"})
       
 
   } catch (error) {
     toast.error("an error occured",{id:"verify"})
     console.log(error.message);
+  }
+
+  try{
+    await auth.signup(state.name,state.email,state.password)
+    {auth.isLoggedIn ? navigate('/chat',{replace:true}) : "" }
+    toast.success("Signed in",{id:"verify"})
+  }
+  catch(error){
+    console.log(error);
   }
 };
   return (

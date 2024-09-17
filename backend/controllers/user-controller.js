@@ -183,11 +183,15 @@ export const verifyy=async(req,res,next)=>{
 export const resetPassword=async(req,res,next)=>{
   const { password,email } =req.body
   const user= await usersModel.findOne({email})
+  console.log(user.password);
   if(!user){
     return res.status(401).send("User not registered OR Token malfunctioned");
   }
   try {
-        user.password=password;
+        const hashedPass = await hash(password, 10);    
+        user.password=hashedPass;
+        await user.save();
+        console.log(user.password);
         return res.json({message:"Password Changed Successfully"})
   } catch (error) {
     return res.json({message:"Some error occured"})

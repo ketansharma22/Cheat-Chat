@@ -26,6 +26,7 @@ const auth=useAuth()
         <Route path='/forgotpass' element={<Forgot/>}/>
         
         <Route path='/verifyotp' element={<VerifyOtp/>}/>
+        <Route path='/reset' element={<ResetPage/>} />
 
         <Route path='/verifySignup' element={<VerifySignup/>}/>
         
