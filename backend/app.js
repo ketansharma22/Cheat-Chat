@@ -9,6 +9,7 @@ config()
 const app= express();
 const origins = [
     'https://cheat-chatf-ketansharma22s-projects.vercel.app',
+    'https://cheat-chat-nbz3zkjo4-ketansharma22s-projects.vercel.app',
     'http://localhost:5173'
 ]
 
