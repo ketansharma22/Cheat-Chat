@@ -7,8 +7,15 @@ import { config } from 'dotenv'
 config()
 // "https://cheat-chatf-ketansharma22s-projects.vercel.app"
 const app= express();
+const origins = [
+    'https://cheat-chatf-ketansharma22s-projects.vercel.app',
+    'http://localhost:5173'
+]
 
-app.use(cors({origin:"https://cheat-chatf-ketansharma22s-projects.vercel.app", credentials:true}))
+app.use(cors({
+    credentials: true,
+    origin: origins,
+  }))
 app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(morgan("dev"))
