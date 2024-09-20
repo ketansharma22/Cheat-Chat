@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./frontend",
+        "use": "@vercel/static-build",
+        "config": {}
+      },
+      {
+        "src": "./backend",
+        "use": "@vercel/node-build",
+        "config": {}
+      }
+    ],
+    "routes": [
+      {
+        "src": "/routes/*",
+        "dest": "backend/routes/*.js"
+      },
+      {
+        "src": "/*",
+        "dest": "frontend/index.html"
+      }
+    ]
+  }
