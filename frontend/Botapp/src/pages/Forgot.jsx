@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../Context/AuthContext";
 const Forgot = () => {
+  const[loading,setLoading]=useState(false)
     const auth=useAuth()
     const navigate=useNavigate()
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ const Forgot = () => {
 
 
   const handleSubmit=async(e)=>{
+    setLoading(true)
     e.preventDefault()
     console.log(formData);
     try {
@@ -25,6 +27,7 @@ const Forgot = () => {
     } catch (error) {
         console.log(error);
     }
+    setLoading(false)
   }
 
 
@@ -36,7 +39,10 @@ const Forgot = () => {
   return (
     <div id="forgot">
       <form onSubmit={handleSubmit} id="forgotform">
+      <label style={{fontWeight:600}}>Enter your Email-Address</label>
         <input
+        disabled={loading}
+        
         style={{padding:5,fontSize:"larger"}}
           type="email"
           placeholder="Email"
@@ -44,7 +50,7 @@ const Forgot = () => {
           value={formData.email}
           name="email"
         />
-        <button type="submit">
+        <button disabled={loading} style={{color:"white",background:"black"}} type="submit">
             Continue
         </button>
       </form>

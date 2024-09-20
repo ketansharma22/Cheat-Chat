@@ -15,6 +15,11 @@
     overflow-x: hidden;
     
 }
+#home button{
+  width: max-content;
+  padding: 10px;
+}
+
 #logoimage{
   width: 40px;
   height: 40px;

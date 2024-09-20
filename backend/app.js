@@ -5,18 +5,11 @@ import appRouter from './routes/index.js';
 import cookieParser from 'cookie-parser';
 import { config } from 'dotenv'
 config()
-// "https://cheat-chatf-ketansharma22s-projects.vercel.app"
 const app= express();
-const origins = [
-    'https://cheat-chatf-ketansharma22s-projects.vercel.app',
-    'https://cheat-chat-nbz3zkjo4-ketansharma22s-projects.vercel.app',
-    'http://localhost:5173'
-]
 
-app.use(cors({
-    credentials: true,
-    origin: origins,
-  }))
+
+app.use(cors({origin:"http://localhost:5173", credentials:true}))
+
 app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(morgan("dev"))

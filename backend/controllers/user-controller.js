@@ -144,6 +144,7 @@ export const userLogout = async (req, res, next) => {
 };
 
 export const forgotton = async (req, res, next) => {
+  console.log("o");
   const { email } = req.body;
   const user = await usersModel.findOne(email)
   if (!user) {
