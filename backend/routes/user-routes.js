@@ -11,4 +11,4 @@ userRoutes.get('/logout',verifyToken,userLogout)
 userRoutes.post('/forgot',forgotton)
 userRoutes.post('/verify',verifyy)
 userRoutes.post('/reset',resetPassword)
-export default userRoutes   
+export default userRoutes       
