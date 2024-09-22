@@ -8,7 +8,8 @@ config()
 const app= express();
 
 
-app.use(cors({origin:"http://localhost:5173", credentials:true}))
+// app.use(cors({origin:"http://localhost:5173", credentials:true}))
+app.use(cors({origin:"https://cheat-chat-ketansharma22s-projects.vercel.app", credentials:true}))
 
 app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))

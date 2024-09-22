@@ -113,7 +113,7 @@ function Chat() {
             ))}
           </section>
           <div id="inputsubmit">
-            <input ref={inputref} type="text" style={{width:"90%",marginRight:40,background:"rgb(35, 35, 35)",border:"2px solid rgb(121, 117, 117)",color:"whitesmoke",fontWeight:"bolder",paddingLeft:20,borderRadius:15,fontSize:"large"}} />
+            <input ref={inputref} type="text" style={{width:"90%",marginRight:40,background:"rgb(35, 35, 35)",border:"2px solid rgb(121, 117, 117)",color:"whitesmoke",fontWeight:"bolder",paddingLeft:20,borderRadius:10,fontSize:"large"}} />
             
             <img  type="submit" onClick={handlesubmit} style={{width:25,marginRight:20,cursor:"pointer"}} src={send} />
           </div>
