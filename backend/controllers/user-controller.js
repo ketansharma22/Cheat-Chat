@@ -41,7 +41,8 @@ export const userSignup = async (req, res, next) => {
     res.clearCookie("auth_token", {
       httpOnly: true,
       signed: true,
-      domain:"cheat-chat-ketansharma22s-projects.vercel.app",
+      secure:true,
+      // domain:"cheat-chat-production.up.railway.app",
     });
     
 
@@ -76,6 +77,7 @@ export const userLogin = async (req, res, next) => {
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
       signed: true,
+      secure: true,
       // domain:"localhost",
     });
 
@@ -88,7 +90,7 @@ export const userLogin = async (req, res, next) => {
       expires,
       httpOnly: true,
       signed: true,
-      domain:"cheat-chat-ketansharma22s-projects.vercel.app",
+      // domain:"localhost",
     });
     res.send({ message: "loginsuccess", name: user.name, email: user.email });
   } catch (error) {
