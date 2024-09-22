@@ -10,7 +10,7 @@ export const createToken= (id,email,expiresIn)=>{
     console.log(token);
     return token;
 }
-export const verifyToken=async(req,res,next)=>{
+export const verifyToken=async(req,res,next)=>{             
     const token=req.signedCookies[`${Cokiename}`]
     console.log(token);
     console.log("tokenmanager");
